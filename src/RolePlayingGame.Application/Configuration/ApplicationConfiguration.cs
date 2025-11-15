@@ -9,6 +9,7 @@ namespace RolePlayingGame.Application.Configuration
 		public static void ConfigureServices(IServiceCollection services)
 		{
 			services.AddScoped<IPostCharacterUseCase, PostCharacterUseCase>();
+			services.AddScoped<IPostBattleUseCase, PostBattleUseCase>();
 			services.AddScoped<IGetCharacterListUseCase, GetCharacterListUseCase>();
 			services.AddScoped<IGetCharacterDetailUseCase, GetCharacterDetailUseCase>();
 		}

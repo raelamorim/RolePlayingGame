@@ -3,6 +3,7 @@ using NSubstitute;
 using RolePlayingGame.Application.Domain.Entities;
 using RolePlayingGame.Application.Domain.Enums;
 using RolePlayingGame.Application.Dtos.Response;
+using RolePlayingGame.Application.Exceptions;
 using RolePlayingGame.Application.UseCase;
 using RolePlayingGame.Domain.Gateways;
 
@@ -62,8 +63,8 @@ namespace RolePlayingGame.UnitTest.Application.UseCase
 			await gateway.Received(1).GetByIdAsync(id);
 		}
 
-		[Fact(DisplayName = "ExecuteAsync returns null when character not found")]
-		public async Task ExecuteAsync_ReturnsNull_WhenNotFound()
+		[Fact(DisplayName = "ExecuteAsync should throw PlayerNotFoundApplicationException when character not found")]
+		public async Task ExecuteAsync_Throws_WhenCharacterNotFound()
 		{
 			// Arrange
 			var gateway = Substitute.For<ICharacterGateway>();
@@ -74,13 +75,24 @@ namespace RolePlayingGame.UnitTest.Application.UseCase
 
 			gateway.GetByIdAsync(id).Returns((Character?)null);
 
-			// Act
-			var result = await useCase.ExecuteAsync(id);
+			// Act + Assert    
+			var ex = await Assert.ThrowsAsync<PlayerNotFoundApplicationException>(() =>
+				useCase.ExecuteAsync(id));
 
-			// Assert
-			Assert.Null(result);
+			Assert.Contains(id.ToString(), ex.Message);
 
+			// Gateway must be called once
 			await gateway.Received(1).GetByIdAsync(id);
+
+			// Logger should have logged at least the request
+			logger.ReceivedWithAnyArgs().Log(
+				Arg.Any<LogLevel>(),
+				Arg.Any<EventId>(),
+				Arg.Any<object>(),
+				Arg.Any<Exception>(),
+				Arg.Any<Func<object, Exception?, string>>()
+			);
 		}
+
 	}
 }

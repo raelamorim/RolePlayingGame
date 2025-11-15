@@ -19,11 +19,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{35934C75-0
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RolePlayingGame.Application", "src\RolePlayingGame.Application\RolePlayingGame.Application.csproj", "{1DD9AD02-8BD8-0E29-7B70-2324622CC56A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RolePlayingGame.UnitTest", "RolePlayingGame.UnitTest\RolePlayingGame.UnitTest.csproj", "{9D7CC059-6A39-43F4-82F5-FC1CFF9601A2}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RolePlayingGame.Domain", "src\RolePlayingGame.Domain\RolePlayingGame.Domain.csproj", "{B66889FC-0E87-A96E-33BA-A46C7DF4A310}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RolePlayingGame.Infrastructure", "src\RolePlayingGame.Infrastructure\RolePlayingGame.Infrastructure.csproj", "{BF87BC80-7AF2-7995-AD5A-3A392D577689}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RolePlayingGame.IntegrationTest", "test\RolePlayingGame.IntegrationTest\RolePlayingGame.IntegrationTest.csproj", "{1F4F4AAE-9A5A-4C1F-96F3-71ED9E5953C6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RolePlayingGame.UnitTest", "test\RolePlayingGame.UnitTest\RolePlayingGame.UnitTest.csproj", "{E58419AF-2F61-F036-7936-F00D974FFE9C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,10 +41,6 @@ Global
 		{1DD9AD02-8BD8-0E29-7B70-2324622CC56A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1DD9AD02-8BD8-0E29-7B70-2324622CC56A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1DD9AD02-8BD8-0E29-7B70-2324622CC56A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9D7CC059-6A39-43F4-82F5-FC1CFF9601A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9D7CC059-6A39-43F4-82F5-FC1CFF9601A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9D7CC059-6A39-43F4-82F5-FC1CFF9601A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9D7CC059-6A39-43F4-82F5-FC1CFF9601A2}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B66889FC-0E87-A96E-33BA-A46C7DF4A310}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B66889FC-0E87-A96E-33BA-A46C7DF4A310}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B66889FC-0E87-A96E-33BA-A46C7DF4A310}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -51,6 +49,14 @@ Global
 		{BF87BC80-7AF2-7995-AD5A-3A392D577689}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BF87BC80-7AF2-7995-AD5A-3A392D577689}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BF87BC80-7AF2-7995-AD5A-3A392D577689}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1F4F4AAE-9A5A-4C1F-96F3-71ED9E5953C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1F4F4AAE-9A5A-4C1F-96F3-71ED9E5953C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1F4F4AAE-9A5A-4C1F-96F3-71ED9E5953C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1F4F4AAE-9A5A-4C1F-96F3-71ED9E5953C6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E58419AF-2F61-F036-7936-F00D974FFE9C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E58419AF-2F61-F036-7936-F00D974FFE9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E58419AF-2F61-F036-7936-F00D974FFE9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E58419AF-2F61-F036-7936-F00D974FFE9C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -62,9 +68,10 @@ Global
 		{6795F788-9368-4557-A69E-4D13B5AD2175} = {851C8838-2AD7-4786-A7BE-7228F0D24192}
 		{1762D2A7-3FDD-EAFC-3F62-E2B484AB755D} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 		{1DD9AD02-8BD8-0E29-7B70-2324622CC56A} = {EA142C04-E839-44FF-BBAB-09E8EBD1D226}
-		{9D7CC059-6A39-43F4-82F5-FC1CFF9601A2} = {35934C75-057E-4ED1-8A44-8000B8F2416E}
 		{B66889FC-0E87-A96E-33BA-A46C7DF4A310} = {AFC0014D-D248-44A3-BAFD-6AC66FCF4FFC}
 		{BF87BC80-7AF2-7995-AD5A-3A392D577689} = {6795F788-9368-4557-A69E-4D13B5AD2175}
+		{1F4F4AAE-9A5A-4C1F-96F3-71ED9E5953C6} = {35934C75-057E-4ED1-8A44-8000B8F2416E}
+		{E58419AF-2F61-F036-7936-F00D974FFE9C} = {35934C75-057E-4ED1-8A44-8000B8F2416E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {217CE44D-BF5B-42C0-8359-87AD8C3C9232}

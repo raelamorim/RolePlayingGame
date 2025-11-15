@@ -22,6 +22,7 @@ namespace RolePlayingGame.Application.Mappers
 		{
 			return new PostCharacterResponse
 			{
+				Id = character.Id,
 				Name = character.Name,
 				Job = character.Job.ToString(),
 				HealthPoints = character.MaximumHealthPoints,
@@ -30,7 +31,7 @@ namespace RolePlayingGame.Application.Mappers
 				Intelligence = character.Intelligence,
 				AttackModifier = character.AttackModifier,
 				SpeedModifier = character.SpeedModifier
-			};
+			};	
 		}
 	}
 }

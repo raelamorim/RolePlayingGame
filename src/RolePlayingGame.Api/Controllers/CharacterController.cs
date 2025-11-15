@@ -51,10 +51,6 @@ namespace RolePlayingGame.Api.Controllers
 		)
 		{
 			var result = await useCase.ExecuteAsync(id);
-
-			if (result is null)
-				return NotFound();
-
 			return Ok(result);
 		}
 	}

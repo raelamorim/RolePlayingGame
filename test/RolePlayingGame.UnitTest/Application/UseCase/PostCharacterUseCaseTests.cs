@@ -113,5 +113,41 @@ namespace RolePlayingGame.UnitTest.Application.UseCase
 				Arg.Any<Func<object, Exception?, string>>()
 			);
 		}
+
+		[Fact(DisplayName = "ExecuteAsync should throw when Job is invalid")]
+		public async Task ExecuteAsync_InvalidJob_ThrowsArgumentException()
+		{
+			// Arrange
+			var request = new PostCharacterRequest
+			{
+				Name = "User123",
+				Job = "InvalidJobName" // <-- job inválido
+			};
+
+			var logger = Substitute.For<ILogger<PostCharacterUseCase>>();
+			var gateway = Substitute.For<ICharacterGateway>();
+
+			var useCase = CreateUseCase(logger, gateway);
+
+			// Act
+			var act = () => useCase.ExecuteAsync(request);
+
+			// Assert
+			var ex = await Assert.ThrowsAsync<ArgumentException>(act);
+			Assert.Contains("Job", ex.Message, StringComparison.OrdinalIgnoreCase);
+
+			// gateway NUNCA pode ser chamado
+			await gateway.DidNotReceive().CreateAsync(Arg.Any<Character>());
+
+			// logger registra ao menos a entrada
+			logger.ReceivedWithAnyArgs().Log(
+				Arg.Any<LogLevel>(),
+				Arg.Any<EventId>(),
+				Arg.Any<object>(),
+				Arg.Any<Exception?>(),
+				Arg.Any<Func<object, Exception?, string>>()
+			);
+		}
+
 	}
 }

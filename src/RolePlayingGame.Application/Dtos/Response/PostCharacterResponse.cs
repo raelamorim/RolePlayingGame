@@ -2,8 +2,9 @@
 {
     public class PostCharacterResponse
     {
+		public Guid Id { get; set; }
 		public string Name { get; set; } = string.Empty;
-		public string Job { get; set; }
+		public string Job { get; set; } = string.Empty;
 		public int HealthPoints { get; set; }
 		public int Strength { get; set; }
 		public int Dexterity { get; set; }

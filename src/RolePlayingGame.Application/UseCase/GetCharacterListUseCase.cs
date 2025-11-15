@@ -1,5 +1,4 @@
 ﻿using Microsoft.Extensions.Logging;
-using RolePlayingGame.Application.Domain.Entities;
 using RolePlayingGame.Application.Dtos.Response;
 using RolePlayingGame.Application.Interfaces;
 using RolePlayingGame.Application.Mappers;

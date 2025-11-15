@@ -18,10 +18,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\src\RolePlayingGame.Api\RolePlayingGame.Api.csproj" />
-    <ProjectReference Include="..\src\RolePlayingGame.Application\RolePlayingGame.Application.csproj" />
-    <ProjectReference Include="..\src\RolePlayingGame.Domain\RolePlayingGame.Domain.csproj" />
-    <ProjectReference Include="..\src\RolePlayingGame.Infrastructure\RolePlayingGame.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\src\RolePlayingGame.Api\RolePlayingGame.Api.csproj" />
+    <ProjectReference Include="..\..\src\RolePlayingGame.Application\RolePlayingGame.Application.csproj" />
+    <ProjectReference Include="..\..\src\RolePlayingGame.Domain\RolePlayingGame.Domain.csproj" />
+    <ProjectReference Include="..\..\src\RolePlayingGame.Infrastructure\RolePlayingGame.Infrastructure.csproj" />
   </ItemGroup>
 
   <ItemGroup>

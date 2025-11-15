@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 using RolePlayingGame.Application.Dtos.Response;
+using RolePlayingGame.Application.Exceptions;
 using RolePlayingGame.Application.Interfaces;
 using RolePlayingGame.Application.Mappers;
 using RolePlayingGame.Domain.Gateways;
@@ -31,10 +32,10 @@ namespace RolePlayingGame.Application.UseCase
 			_logger.LogInformation("Starting GetCharacterDetail id: {id}", id);
 
 			// Get Character
-			var character = await _gateway.GetByIdAsync(id);
+			var character = await _gateway.GetByIdAsync(id) ?? throw new PlayerNotFoundApplicationException(id); ;
 
 			// Mapping Domain → DTO
-			var response = character?.ToDetailResponse();
+			var response = character.ToDetailResponse();
 
 			// Log response
 			_logger.LogInformation("Finished GetCharacterDetail response: {json}",

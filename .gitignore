@@ -5,6 +5,19 @@ project.lock.json
 *.pyc
 nupkg/
 
+# --- Coverlet / Code Coverage ---
+coverage/
+coverage-report/
+coverage.cobertura.xml
+coverage.json
+coverage.info
+coverage.opencover.xml
+
+TestResults/
+**/TestResults/
+**/coverage/
+**/coverage-report/
+
 # Logs directory
 */Local/output/
 */Local/logs/

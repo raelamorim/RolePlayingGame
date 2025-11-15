@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RunSettings>
+  <DataCollectionRunSettings>
+    <DataCollectors>
+      <DataCollector friendlyName="XPlat Code Coverage">
+        <Configuration>
+          <Format>cobertura</Format>
+          <SingleHit>false</SingleHit>
+          <Exclude>
+            <ModulePath>.*RolePlayingGame\.IntegrationTest\.dll</ModulePath>
+            <ModulePath>.*RolePlayingGame\.UnitTest\.dll</ModulePath>
+          </Exclude>
+          <ExcludeByAttribute>
+            <Attribute>ExcludeFromCodeCoverage</Attribute>
+          </ExcludeByAttribute>
+        </Configuration>
+      </DataCollector>
+    </DataCollectors>
+  </DataCollectionRunSettings>
+</RunSettings>

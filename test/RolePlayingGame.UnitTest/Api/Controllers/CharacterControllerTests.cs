@@ -205,24 +205,5 @@ namespace RolePlayingGame.UnitTest.Api.Controllers
 
 			await useCase.Received(1).ExecuteAsync(id);
 		}
-
-		[Fact(DisplayName = "GetCharacter returns 404 NotFound when character does not exist")]
-		public async Task GetCharacter_ReturnsNotFound_WhenNull()
-		{
-			// Arrange
-			var controller = CreateController();
-			var id = Guid.NewGuid();
-
-			var useCase = Substitute.For<IGetCharacterDetailUseCase>();
-			useCase.ExecuteAsync(id).Returns((GetCharacterDetailResponse?)null);
-
-			// Act
-			var result = await controller.GetCharacterAsync(id, useCase);
-
-			// Assert
-			Assert.IsType<NotFoundResult>(result.Result);
-
-			await useCase.Received(1).ExecuteAsync(id);
-		}
 	}
 }
