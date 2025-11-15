@@ -1,127 +1,128 @@
-# UBS.Risk.Evaluator.Batch 🏦⚙️
+# RolePlayingGame 🎲⚔️
 
-Welcome to **UBS.Risk.Evaluator.Batch**! This project is responsible for processing and classifying trades automatically, logging, and generating classified outputs. The solution is organized into two projects:
+Sample .NET 8 project to manage characters and simulate battles (API + Application/Domain/Infrastructure layers + unit & integration tests). 🚀
 
-1. **UBS.Risk.Evaluator.Batch** (main project)  
-2. **UBS.Risk.Evaluator.Batch.Test** (unit testing project)
-
-## Directory Structure 🌳
-
-```mathematica
-UBS.Risk.Evaluator.Batch
-│   ├── Application
-│   │    └── ...
-│   ├── Domain
-│   │    └── ...
-│   ├── Infrastructure
-│   │    └── ...
-│   ├── Local
-│   │    └── ...
-│   ├── appsettings.json
-│   ├── Dockerfile
-│   └── Program.cs
-│
-└── UBS.Risk.Evaluator.Batch.Test
-    └── ...
+## Checkout the repository 👇
+Clone and open the repo locally:
+```bash
+git clone https://github.com/raelamorim/RolePlayingGame.git
+cd RolePlayingGame
+dotnet restore
 ```
 
-### Key Directories:
+## Status ✅
+- API: src/RolePlayingGame.Api/RolePlayingGame.Api.csproj  
+- Unit tests: test/RolePlayingGame.UnitTest/RolePlayingGame.UnitTest.csproj 🧪  
+- Integration tests: test/RolePlayingGame.IntegrationTest/RolePlayingGame.IntegrationTest.csproj 🔁
 
-- **Application**  
-  Contains the trade processing logic, such as the `TradeProcessor` class.
+## Quick design overview 🧭
+- Controllers: POST/GET — CharacterController, BattleController ⚔️  
+- Application use cases: PostCharacterUseCase, PostBattleUseCase, GetCharacterListUseCase, GetCharacterDetailUseCase 🛠️  
+- Main entity: Character (with Job enum) 👤  
+- Battle logic: ValueObject Battle ⚔️  
+- Infrastructure (EF InMemory): CharacterRepository, RolePlayingGameDbContext 🗄️  
+- Mappers for DTOs: PostCharacterMapper, GetCharacterListMapper, GetCharacterDetailMapper, PostBattleMapper 🔄
 
-- **Domain**  
-  Responsible for the project's business rules.
+## How to run locally 🏃‍♂️
+Prerequisites:
+- .NET 8 SDK
 
-- **Infrastructure**  
-  Responsible for support services, such as file reading and writing (`FileManager`).
+Run the API:
+- From the solution root:
+  - dotnet build
+  - dotnet run --project src/RolePlayingGame.Api
 
-- **Local**
-  Example directory where input or output files are located.
+Main host entry: src/RolePlayingGame.Api/Program.cs. Startup is in src/RolePlayingGame.Api/Startup.cs. 🔧
 
-- **appsettings.json**  
-  Configuration file defining input and output paths, among other variables.
+## Developer tools — Stryker (mutation) & Coverlet (coverage) 🧰
+Install as global tools (quick, system-wide):
+```powershell
+# Stryker.NET (mutation testing)
+dotnet tool install --global dotnet-stryker
 
-- **Dockerfile**  
-  Allows the creation of a Docker image to run the project in a container.
+# Coverlet console (coverage tooling)
+dotnet tool install --global coverlet.console
+```
 
-- **UBS.Risk.Evaluator.Batch.Test**  
-  Contains unit tests written in **xUnit**. Here you find `TradeProcessorTests.cs` and other test files.
+Or install locally in the repository (recommended for CI consistency):
+```powershell
+# create a local tool manifest (if not present)
+dotnet new tool-manifest
 
-## How to Run 🚀
+# install tools to the manifest (local tools)
+dotnet tool install dotnet-stryker
+dotnet tool install coverlet.console
+```
 
-1. **Clone the Repository**  
-   ```bash
-   git clone https://github.com/raelamorim/ubs-risk-evaluator-batch.git
-   cd UBS.Risk.Evaluator.Batch
-    ```
+How to run:
+- Stryker (mutation testing):
+  - If installed globally: dotnet stryker
+  - If installed as local tool: dotnet tool run dotnet-stryker
+- Coverlet (console) — example of running coverage for a test DLL:
+  - coverlet <path-to-test-assembly> --target "dotnet" --targetargs "test --no-build" --output "coverage.json" --format "lcov"
+  - If using local tool: dotnet tool run coverlet ...
 
-2. **Restore Dependencies**
-    ```bash
-    dotnet restore
-    ```
-3. **Run the Application**
-    ```bash
-    dotnet run --project .\UBS.Risk.Evaluator.Batch\UBS.Risk.Evaluator.Batch.csproj
-    ```
+Notes:
+- The repository includes a PowerShell coverage script (.\run-tests-with-coverage.ps1). Install the tools (global or local) above so the script can call the required tools. 🛠️
+- For CI, prefer local tool manifest to lock tool versions.
 
-    The application will use the configurations defined in appsettings.json. Ensure the file paths are correct.
+## Tests 🧪
+Run all tests:
+- dotnet test
 
-## How to Run Tests 🧪
+Coverage script (Windows PowerShell):
+- .\run-tests-with-coverage.ps1 — uses coverlet and ReportGenerator to emit coverage-report/index.html 📊
 
-1. **Enter the Solution Directory**
-Make sure you are in the root of the repository, where the .sln file is.
+Key test files:
+- Unit: test/RolePlayingGame.UnitTest/Domain/Entities/CharacterTests.cs  
+- Integration (BDD): test/RolePlayingGame.IntegrationTest/Features/RolePlayingGame.feature and step definitions in test/RolePlayingGame.IntegrationTest/Steps/
 
-2. **Run Tests**
-    ```bash
-    dotnet test
-    ```
-    This will run all tests in UBS.Risk.Evaluator.Batch.Test and display the result in the console.
+## Main endpoints 📎
+- POST /characters — create character (validations in PostCharacterRequest) ➕  
+- GET /characters — list characters 📋  
+- GET /characters/{id} — character detail 🔍  
+- POST /battles — run battle between two character ids ⚔️
 
-## How to Build the Docker Image 🐳
+Controllers:
+- src/RolePlayingGame.Api/Controllers/CharacterController.cs  
+- src/RolePlayingGame.Api/Controllers/BattleController.cs
 
-1. **Open project directory**
-    ```bash
-    cd UBS.Risk.Evaluator.Batch    
-    ```
+## Repository layout 📁
+- src/RolePlayingGame.Api/ — Web API (Program.cs, Startup.cs)  
+- src/RolePlayingGame.Application/ — Use cases, DTOs, mappers  
+- src/RolePlayingGame.Domain/ — Entities, value objects, enums  
+- src/RolePlayingGame.Infrastructure/ — Configuration and EF repositories  
+- test/ — Unit and integration tests (BDD)
 
-2. **Create the Image**
-    ```bash
-    docker build -t ubs-risk-evaluator .
-    ```
+## Notes & best practices 💡
+- Infrastructure uses InMemory DB for development by default (see InfrastructureConfiguration). 🧰  
+- Domain errors (e.g., player not found) throw application exceptions and are mapped by GlobalExceptionMiddleware. ⚠️  
+- Keep mappers thin and cover mapping/domain rules with tests. ✅
 
-2. **Run the Container**
-    ```bash
-    docker run --rm ubs-risk-evaluator
-    ```
-    Adjust volume mappings or environment variables as needed to point to input/output files.
+## Docker 🐳
+Build and run:
+- cd src/RolePlayingGame.Api
+- docker build -t roleplayinggame-api .
+- docker run --rm roleplayinggame-api
 
-## File and Directory Configuration 📂
-
-* `appsettings.json`
-    * `InputFilePath`: Path to the input file containing the trades.
-    * `OutputFilePath`: Path to the output file where the classification will be saved.
-
-* `Local/Input`
-    * Example folder where input files can be placed for local processing.
-
+Use volumes or environment variables to map local input/output if needed.
 
 ## Contributing 🤝
+- Fork → branch → PR  
+- Run tests locally before submitting  
+- Keep PRs small and focused; include tests for behavior changes
 
-1. Fork the repository.
-2. Create your feature branch `git checkout -b feature/my-feature.`
-3. Commit your changes: `git commit -m 'Add new feature'.`
-4. Push to the branch: `git push origin feature/my-feature.`
-5. Open a Pull Request for review.
+## Links (quick) 🔗
+- src/RolePlayingGame.Api/Controllers/CharacterController.cs  
+- src/RolePlayingGame.Api/Controllers/BattleController.cs  
+- src/RolePlayingGame.Api/Startup.cs  
+- src/RolePlayingGame.Api/Program.cs  
+- src/RolePlayingGame.Application/UseCase/PostCharacterUseCase.cs  
+- src/RolePlayingGame.Application/UseCase/PostBattleUseCase.cs  
+- src/RolePlayingGame.Domain/Entities/Character.cs  
+- src/RolePlayingGame.Domain/ValueObjects/Battle.cs  
+- src/RolePlayingGame.Infrastructure/Databases/Repositories/CharacterRepository.cs  
+- test/RolePlayingGame.UnitTest/Domain/Entities/CharacterTests.cs  
+- test/RolePlayingGame.IntegrationTest/Features/RolePlayingGame.feature
 
-## License 📄
-
-The MIT License (MIT)
-
-Copyright (c) 2025 Israel Amorim
-
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE
+Enjoy coding! 🎉

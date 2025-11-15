@@ -1,6 +1,66 @@
-@RolePlayingGame.Api_HostAddress = http://localhost:5182
+@RolePlayingGame.Api_HostAddress = https://localhost:7279
 
-GET {{RolePlayingGame.Api_HostAddress}}/weatherforecast/
+###################################################################
+### 1?? GET – Lista inicial (deve estar vazia no primeiro uso)
+###################################################################
+GET {{RolePlayingGame.Api_HostAddress}}/characters/
 Accept: application/json
+###
 
+###################################################################
+### 2?? POST – Create Player 1
+###################################################################
+POST {{RolePlayingGame.Api_HostAddress}}/characters/
+Accept: application/json
+Content-Type: application/json
+
+{
+  "name": "PlayerOne",
+  "job": "Mage"
+}
+###
+> {% 
+   client.global.set("player1Id", response.body.id);
+   console.log("Player1 ID =", response.body.id);
+%}
+
+###################################################################
+### 3?? POST – Create Player 2
+###################################################################
+POST {{RolePlayingGame.Api_HostAddress}}/characters/
+Accept: application/json
+Content-Type: application/json
+
+{
+  "name": "PlayerTwo",
+  "job": "Warrior"
+}
+###
+> {% 
+   client.global.set("player2Id", response.body.id);
+   console.log("Player2 ID =", response.body.id);
+%}
+
+###################################################################
+### 4?? POST – Create Player 3
+###################################################################
+POST {{RolePlayingGame.Api_HostAddress}}/characters/
+Accept: application/json
+Content-Type: application/json
+
+{
+  "name": "PlayerThree",
+  "job": "Thief"
+}
+###
+> {% 
+   client.global.set("player3Id", response.body.id);
+   console.log("Player3 ID =", response.body.id);
+%}
+
+###################################################################
+### 5?? GET – Lista geral de personagens
+###################################################################
+GET {{RolePlayingGame.Api_HostAddress}}/characters/
+Accept: application/json
 ###
