@@ -1,4 +1,5 @@
 ﻿using RolePlayingGame.Application.Domain.Entities;
+using RolePlayingGame.Domain.Services;
 using System.Text;
 
 namespace RolePlayingGame.Domain.ValueObjects
@@ -7,13 +8,14 @@ namespace RolePlayingGame.Domain.ValueObjects
     {
 		private readonly Character _char1;
 		private readonly Character _char2;
-		private readonly Random _random = new();
+		private readonly IRandomProvider _random;
 		private readonly StringBuilder _log = new();
 		
-		public Battle(Character char1, Character char2)
+		public Battle(Character char1, Character char2, IRandomProvider? randomProvider = null)
 		{
 			_char1 = char1;
 			_char2 = char2;
+			_random = randomProvider ?? new DefaultRandomProvider();
 		}
 
 		public BattleResult ExecuteBattle()
