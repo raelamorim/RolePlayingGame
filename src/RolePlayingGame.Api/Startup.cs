@@ -1,6 +1,8 @@
 ﻿using RolePlayingGame.Api.Configuration;
 using RolePlayingGame.Application.Configuration;
 using RolePlayingGame.Infrastructure.Configuration;
+using Microsoft.AspNetCore.Hosting.Server.Features;
+using System.Linq;
 
 namespace RolePlayingGame.Api
 {
@@ -47,7 +49,14 @@ namespace RolePlayingGame.Api
 
 			app.UseMiddleware<GlobalExceptionMiddleware>();
 
-			app.UseHttpsRedirection();
+			// Only use HTTPS redirection if the server actually exposes an HTTPS address.
+			// This prevents "Failed to determine the https port for redirect." in containers
+			// where HTTPS is not configured.
+			var addressesFeature = app.ServerFeatures.Get<IServerAddressesFeature>();
+			if (addressesFeature != null && addressesFeature.Addresses.Any(a => a.StartsWith("https://", StringComparison.OrdinalIgnoreCase)))
+			{
+				app.UseHttpsRedirection();
+			}
 
 			app.UseRouting();
 			app.UseAuthorization();

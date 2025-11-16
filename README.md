@@ -23,9 +23,17 @@ dotnet restore
 - Infrastructure (EF InMemory): CharacterRepository, RolePlayingGameDbContext 🗄️  
 - Mappers for DTOs: PostCharacterMapper, GetCharacterListMapper, GetCharacterDetailMapper, PostBattleMapper 🔄
 
+## How to run in Docker 🐳
+Build and run:
+- docker-compose up
+
+Use http://localhost:5000 as **baseUrl**, if using postman file
+
 ## How to run locally 🏃‍♂️
 Prerequisites:
 - .NET 8 SDK
+
+Use https://localhost:7279 as **baseUrl**, if using postman file
 
 Run the API:
 - From the solution root:
@@ -33,6 +41,49 @@ Run the API:
   - dotnet run --project src/RolePlayingGame.Api
 
 Main host entry: src/RolePlayingGame.Api/Program.cs. Startup is in src/RolePlayingGame.Api/Startup.cs. 🔧
+
+Run the solution (quick guide):
+- Windows PowerShell:
+  - Set environment (optional): `$env:ASPNETCORE_ENVIRONMENT = "Development"`
+  - Build: `dotnet build`
+  - Run API: `dotnet run --project src/RolePlayingGame.Api`
+  - Run tests: `dotnet test`
+- macOS / Linux (bash):
+  - Export env (optional): `export ASPNETCORE_ENVIRONMENT=Development`
+  - Build: `dotnet build`
+  - Run API: `dotnet run --project src/RolePlayingGame.Api`
+  - Run tests: `dotnet test`
+
+Notes:
+- When you run the API it will print the listening URL(s) (e.g. https://localhost:7279). Use those to call the endpoints (e.g. GET /characters).
+- The project uses an InMemory DB by default for development — no DB migrations are required.
+
+Docker:
+- Build image:
+  - cd src/RolePlayingGame.Api
+  - docker build -t roleplayinggame-api .
+- Run container (map ports as needed):
+  - docker run --rm -p 5000:80 roleplayinggame-api
+- Adjust port mapping if your container exposes a different port.
+
+Developer tooling (optional):
+- Run mutation testing (Stryker):
+  - If installed globally: dotnet stryker
+  - If using local tools: dotnet tool run dotnet-stryker
+- Run coverage (Coverlet):
+  - Example (console): coverlet <path-to-test-assembly> --target "dotnet" --targetargs "test --no-build" --output "coverage.json" --format "lcov"
+  - Or use the local tool: dotnet tool run coverlet ...
+
+Troubleshooting:
+- To force a specific port: dotnet run --project src/RolePlayingGame.Api --urls "http://localhost:5000"
+- If you need logs/traces from OpenTelemetry, set OpenTelemetry endpoint in appsettings or start a local collector (Jaeger/OTLP) and check the collector UI.
+
+## Postman collection 📮
+- A collection Postman está disponível em: ./postman/RolePlayingGame.postman_collection.json
+- Para usar:
+  1. Abra o Postman.
+  2. Import → File → selecione ./postman/RolePlayingGame.postman_collection.json.
+  3. Execute a collection apontando o ambiente/baseUrl (ex.: http://localhost:5000 ou https://localhost:7279).
 
 ## Developer tools — Stryker (mutation) & Coverlet (coverage) 🧰
 Install as global tools (quick, system-wide):
@@ -78,10 +129,13 @@ Key test files:
 - Integration (BDD): test/RolePlayingGame.IntegrationTest/Features/RolePlayingGame.feature and step definitions in test/RolePlayingGame.IntegrationTest/Steps/
 
 ## Main endpoints 📎
-- POST /characters — create character (validations in PostCharacterRequest) ➕  
-- GET /characters — list characters 📋  
-- GET /characters/{id} — character detail 🔍  
-- POST /battles — run battle between two character ids ⚔️
+- POST api/characters — create character (validations in PostCharacterRequest) ➕  
+- GET api/characters — list characters 📋  
+- GET api/characters/{id} — character detail 🔍  
+- POST api/battles — run battle between two character ids ⚔️
+
+- GET /api/observability/health — application health check
+- GET /api/observability/metrics — application metrics
 
 Controllers:
 - src/RolePlayingGame.Api/Controllers/CharacterController.cs  
@@ -98,14 +152,6 @@ Controllers:
 - Infrastructure uses InMemory DB for development by default (see InfrastructureConfiguration). 🧰  
 - Domain errors (e.g., player not found) throw application exceptions and are mapped by GlobalExceptionMiddleware. ⚠️  
 - Keep mappers thin and cover mapping/domain rules with tests. ✅
-
-## Docker 🐳
-Build and run:
-- cd src/RolePlayingGame.Api
-- docker build -t roleplayinggame-api .
-- docker run --rm roleplayinggame-api
-
-Use volumes or environment variables to map local input/output if needed.
 
 ## Contributing 🤝
 - Fork → branch → PR  

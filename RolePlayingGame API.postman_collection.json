@@ -1,0 +1,401 @@
+{
+	"info": {
+		"_postman_id": "3c3f7177-98e6-42d3-8c60-1d300c7b797d",
+		"name": "RolePlayingGame API",
+		"description": "Coleção para testar criação de personagens, listagem e criação de batalhas.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "10259627"
+	},
+	"item": [
+		{
+			"name": "GET Characters (initial)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/api/characters",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"characters"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Player 1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let id = pm.response.json().id;",
+							"pm.environment.set(\"player1Id\", id);",
+							"console.log(\"Player1Id =\", id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"name\": \"PlayerOne\",\n  \"job\": \"Mage\"\n}"
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/characters",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"characters"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Player 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let id = pm.response.json().id;",
+							"pm.environment.set(\"player2Id\", id);",
+							"console.log(\"Player2Id =\", id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"name\": \"PlayerTwo\",\n  \"job\": \"Warrior\"\n}"
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/characters",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"characters"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Player 3",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let id = pm.response.json().id;",
+							"pm.environment.set(\"player3Id\", id);",
+							"console.log(\"Player3Id =\", id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"name\": \"PlayerThree\",\n  \"job\": \"Thief\"\n}"
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/characters",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"characters"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Characters (after creation)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/api/characters",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"characters"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Battle",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const json = pm.response.json();\r",
+							"\r",
+							"let raw = json.battleLog || \"\";\r",
+							"\r",
+							"let lines = raw.split(/\\r\\n|\\n/).filter(l => l.trim().length > 0);\r",
+							"\r",
+							"// Apply styles per line\r",
+							"function formatLine(line) {\r",
+							"    if (/wins the battle!/i.test(line))\r",
+							"        return `<span class=\"winner\">${line}</span><br>`;\r",
+							"\r",
+							"    if (/attacks/i.test(line))\r",
+							"        return `<span class=\"attack\">${line}</span><br>`;\r",
+							"\r",
+							"    if (/was faster/i.test(line))\r",
+							"        return `<span class=\"speed\">${line}</span><br>`;\r",
+							"\r",
+							"    if (line.startsWith(\"Battle \"))\r",
+							"        return `<span class=\"header\">${line}</span><br>`;\r",
+							"\r",
+							"    return `${line}<br>`;\r",
+							"}\r",
+							"\r",
+							"const formatted = lines.map(formatLine).join(\"\");\r",
+							"\r",
+							"const template = `\r",
+							"<!DOCTYPE html>\r",
+							"<html>\r",
+							"<head>\r",
+							"<style>\r",
+							"body {\r",
+							"    background: #1e1e1e;\r",
+							"    color: #e0e0e0;\r",
+							"    font-family: Consolas, monospace;\r",
+							"    padding: 20px;\r",
+							"}\r",
+							".box {\r",
+							"    background: #252526;\r",
+							"    padding: 20px;\r",
+							"    border-radius: 8px;\r",
+							"    border: 1px solid #3c3c3c;\r",
+							"    line-height: 1.5;\r",
+							"    font-size: 14px;\r",
+							"}\r",
+							".header {\r",
+							"    color: #4fc3f7;\r",
+							"    font-weight: bold;\r",
+							"}\r",
+							".attack {\r",
+							"    color: #ffb74d;\r",
+							"    font-weight: bold;\r",
+							"}\r",
+							".speed {\r",
+							"    color: #ba68c8;\r",
+							"}\r",
+							".winner {\r",
+							"    color: #81c784;\r",
+							"    font-weight: bold;\r",
+							"    font-size: 16px;\r",
+							"}\r",
+							"</style>\r",
+							"</head>\r",
+							"<body>\r",
+							"\r",
+							"<h2>Battle Log</h2>\r",
+							"\r",
+							"<div class=\"box\">\r",
+							"${formatted}\r",
+							"</div>\r",
+							"\r",
+							"</body>\r",
+							"</html>\r",
+							"`;\r",
+							"\r",
+							"pm.visualizer.set(template, {});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"character1Id\": \"{{player1Id}}\",\n  \"character2Id\": \"{{player2Id}}\"\n}"
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/battles",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"battles"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Player 1",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/api/characters/{{player1Id}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"characters",
+						"{{player1Id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Player 2",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/api/characters/{{player2Id}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"characters",
+						"{{player2Id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Player 3",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/api/characters/{{player3Id}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"characters",
+						"{{player3Id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Health Check",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/api/observability/health",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"observability",
+						"health"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Metrics",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/api/observability/metrics",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"observability",
+						"metrics"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:5000"
+		}
+	]
+}
