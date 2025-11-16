@@ -6,7 +6,7 @@ using RolePlayingGame.Application.Interfaces;
 namespace RolePlayingGame.Api.Controllers
 {
 	[ApiController]
-	[Route("characters")]
+	[Route("api/characters")]
 	public class CharacterController : ControllerBase
 	{
 		private readonly ILogger<CharacterController> _logger;

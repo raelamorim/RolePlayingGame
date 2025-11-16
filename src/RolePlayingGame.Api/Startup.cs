@@ -24,6 +24,9 @@ namespace RolePlayingGame.Api
 			services.AddEndpointsApiExplorer();
 			services.AddSwaggerGen();
 
+			// OpenTelemetry / Observability
+			services.ConfigureOpenTelemetry(Configuration);
+
 			// Application layer
 			ApplicationConfiguration.ConfigureServices(services);
 

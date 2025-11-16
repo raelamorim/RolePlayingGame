@@ -130,7 +130,7 @@ namespace RolePlayingGame.IntegrationTest.Features
             {
                 await this.ScenarioStartAsync();
 #line 11
-    await testRunner.WhenAsync("I GET \"/characters\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
+    await testRunner.WhenAsync("I GET \"api/characters\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
 #line 12
     await testRunner.ThenAsync("the response status should be 200", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
@@ -172,7 +172,7 @@ namespace RolePlayingGame.IntegrationTest.Features
     await testRunner.GivenAsync("I have a character body:", ((string)(null)), table1, "Given ");
 #line hidden
 #line 22
-    await testRunner.WhenAsync("I POST to \"/characters\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
+    await testRunner.WhenAsync("I POST to \"api/characters\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
 #line 23
     await testRunner.ThenAsync("the response status should be 200", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
@@ -214,7 +214,7 @@ namespace RolePlayingGame.IntegrationTest.Features
     await testRunner.GivenAsync("I have a character body:", ((string)(null)), table2, "Given ");
 #line hidden
 #line 30
-    await testRunner.WhenAsync("I POST to \"/characters\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
+    await testRunner.WhenAsync("I POST to \"api/characters\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
 #line 31
     await testRunner.ThenAsync("the response status should be 400", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
@@ -253,7 +253,7 @@ namespace RolePlayingGame.IntegrationTest.Features
     await testRunner.GivenAsync("I have a character body:", ((string)(null)), table3, "Given ");
 #line hidden
 #line 37
-    await testRunner.WhenAsync("I POST to \"/characters\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
+    await testRunner.WhenAsync("I POST to \"api/characters\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
 #line 38
     await testRunner.ThenAsync("the response status should be 400", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
@@ -283,7 +283,7 @@ namespace RolePlayingGame.IntegrationTest.Features
             {
                 await this.ScenarioStartAsync();
 #line 44
-    await testRunner.WhenAsync("I GET \"/characters\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
+    await testRunner.WhenAsync("I GET \"api/characters\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
 #line 45
     await testRunner.ThenAsync("the response status should be 200", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
@@ -325,7 +325,7 @@ namespace RolePlayingGame.IntegrationTest.Features
     await testRunner.GivenAsync("I have created a character:", ((string)(null)), table4, "Given ");
 #line hidden
 #line 52
-    await testRunner.WhenAsync("I GET \"/characters/{id}\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
+    await testRunner.WhenAsync("I GET \"api/characters/{id}\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
 #line 53
     await testRunner.ThenAsync("the response status should be 200", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
@@ -358,7 +358,7 @@ namespace RolePlayingGame.IntegrationTest.Features
             {
                 await this.ScenarioStartAsync();
 #line 57
-    await testRunner.WhenAsync("I GET \"/characters/99999\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
+    await testRunner.WhenAsync("I GET \"api/characters/99999\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
 #line 58
     await testRunner.ThenAsync("the response status should be 404", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
@@ -409,7 +409,7 @@ namespace RolePlayingGame.IntegrationTest.Features
     await testRunner.AndAsync("I have a battle request using these two characters", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
 #line 71
-    await testRunner.WhenAsync("I POST to \"/battles\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
+    await testRunner.WhenAsync("I POST to \"api/battles\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
 #line 72
     await testRunner.ThenAsync("the response status should be 200", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
@@ -455,7 +455,7 @@ namespace RolePlayingGame.IntegrationTest.Features
                         "nonexistent character 859A0FE1-2D65-4828-9E56-E05AC196A283", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
 #line 80
-    await testRunner.WhenAsync("I POST to \"/battles\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
+    await testRunner.WhenAsync("I POST to \"api/battles\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
 #line 81
     await testRunner.ThenAsync("the response status should be 404", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
@@ -497,7 +497,7 @@ namespace RolePlayingGame.IntegrationTest.Features
     await testRunner.AndAsync("I have a battle request using character 1 and the same character 1", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
 #line 88
-    await testRunner.WhenAsync("I POST to \"/battles\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
+    await testRunner.WhenAsync("I POST to \"api/battles\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
 #line 89
     await testRunner.ThenAsync("the response status should be 400", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
@@ -527,7 +527,7 @@ namespace RolePlayingGame.IntegrationTest.Features
             {
                 await this.ScenarioStartAsync();
 #line 92
-    await testRunner.WhenAsync("I POST to \"/battles\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
+    await testRunner.WhenAsync("I POST to \"api/battles\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
 #line 93
     await testRunner.ThenAsync("the response status should be 400", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
@@ -566,7 +566,7 @@ namespace RolePlayingGame.IntegrationTest.Features
     await testRunner.GivenAsync("I have a character body:", ((string)(null)), table9, "Given ");
 #line hidden
 #line 102
-    await testRunner.WhenAsync("I POST to \"/characters\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
+    await testRunner.WhenAsync("I POST to \"api/characters\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
 #line 103
     await testRunner.ThenAsync("the response status should be 200", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
@@ -581,7 +581,7 @@ namespace RolePlayingGame.IntegrationTest.Features
     await testRunner.GivenAsync("I have a character body:", ((string)(null)), table10, "Given ");
 #line hidden
 #line 108
-    await testRunner.WhenAsync("I POST to \"/characters\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
+    await testRunner.WhenAsync("I POST to \"api/characters\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
 #line 109
     await testRunner.ThenAsync("the response status should be 200", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");

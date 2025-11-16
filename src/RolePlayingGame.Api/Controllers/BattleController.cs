@@ -7,7 +7,7 @@ using RolePlayingGame.Application.Interfaces;
 namespace RolePlayingGame.Api.Controllers
 {
 	[ApiController]
-	[Route("battles")]
+	[Route("api/battles")]
 	public class BattleController : ControllerBase
 	{
 		private readonly ILogger<BattleController> _logger;

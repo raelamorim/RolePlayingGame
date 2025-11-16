@@ -41,7 +41,7 @@ public class CharacterSteps
 	public async Task GivenIHaveCreatedACharacter(Table table)
 	{
 		GivenIHaveACharacterBody(table);
-		await WhenIPOSTTo("/characters");
+		await WhenIPOSTTo("api/characters");
 
 		// Store created character data
 		var responseBody = await _context.LastResponse!.Content.ReadAsStringAsync();
